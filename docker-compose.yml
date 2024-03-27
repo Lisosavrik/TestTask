@@ -1,0 +1,21 @@
+version: '3.0'
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile.django
+    container_name: python-container
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+    
+  redis:
+    image: redis
+
+
+    
