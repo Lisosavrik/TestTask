@@ -4,8 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../static/main.css">
 </head>
 <body>
-    <h1>Projects page</h1>
+    <table style="border: 1px solid black">
+        <tr>
+            <th>Num</th>
+            <th>Project ID</th>
+            <th>Title</th>
+            <th>Date </th>
+            <th>Status</th>
+            <th>Sector</th>
+            <th>Location</th>
+            <th>Amount</th>
+        </tr>
+        {% for proj in page_obj %}
+
+            <tr>
+                <td>
+                    {% if page_obj.number == 2%}
+                        {% with second_page_num=forloop.counter|add:100 %}
+                            {{ second_page_num }}
+                        {% endwith %}
+                    {% else %}
+                        {{ forloop.counter }}
+                    {% endif %}
+
+
+                </td>
+                <td>
+                    {{ proj.project_id }}
+                </td>
+                <td>
+                    {{ proj.title }}
+                </td>
+                <td>
+                    {{ proj.date }}
+                </td>
+                <td>
+                    {{ proj.status }}
+                </td>
+                <td>
+                    {{ proj.sector }}
+                </td>
+                <td>
+                    {{ proj.location }}
+                </td>
+                <td>
+                    {{ proj.amount }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Back</a>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+    
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
 </body>
 </html>
