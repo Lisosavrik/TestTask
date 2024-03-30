@@ -22,13 +22,10 @@
 
             <tr>
                 <td>
-                    {% if page_obj.number == 2%}
-                        {% with second_page_num=forloop.counter|add:100 %}
-                            {{ second_page_num }}
-                        {% endwith %}
-                    {% else %}
-                        {{ forloop.counter }}
-                    {% endif %}
+                    {% load custom_filters %}
+                    {% with page_nums=forloop.counter|sequence_num:page_obj.number %}
+                        {{ page_nums }}
+                    {% endwith %}
 
 
                 </td>
