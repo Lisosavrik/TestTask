@@ -62,8 +62,12 @@ WSGI_APPLICATION = 'testtask.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'mysecretpassword',
+        'HOST': 'db',  
+        'PORT': '5432',
     }
 }
 
@@ -124,5 +128,5 @@ CELERY_BEAT_SCHEDULE = {
     'update_at_time': {
         'task': 'main.tasks.update_at_time',  
         'schedule': crontab(hour=3, minute=0), 
-}
+    },
 }
