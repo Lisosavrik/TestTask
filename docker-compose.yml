@@ -4,9 +4,7 @@ services:
   python:
     build:
       context: .
-      dockerfile: Dockerfile.django
-    container_name: python-container
-    command: python manage.py runserver 0.0.0.0:8000
+      target: backend
     ports:
       - 8000:8000
     volumes:
@@ -16,6 +14,8 @@ services:
     
   redis:
     image: redis
+    ports:
+      - 6379:6379
 
 
     
